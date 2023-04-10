@@ -1,6 +1,4 @@
-package ar.unrn.eje1.libro;
-
-import ar.unrn.eje1.Alquiler;
+package ar.unrn.eje1;
 
 public class Regular extends Libro{
 

@@ -1,6 +1,4 @@
-package ar.unrn.eje1.libro;
-
-import ar.unrn.eje1.Alquiler;
+package ar.unrn.eje1;
 
 public class Infantil extends Libro{
 
@@ -13,5 +11,5 @@ public class Infantil extends Libro{
         if (alquiler.diasAlquilados() > 3)
           monto += (alquiler.diasAlquilados() - 3) * 1.5;  
 		return monto;
-	  }
+	}
 }
