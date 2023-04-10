@@ -2,50 +2,50 @@ package ar.unrn.eje3;
 
 import java.time.LocalDate;
 import java.util.List;
-
-enum TipoDeGasto {
-  CENA, DESAYUNO, ALQUILER_AUTO
-}
-
-class Gasto {
-  TipoDeGasto tipoGasto;
-  int monto;
-}
+import java.util.Objects;
 
 public class ReporteDeGastos {
-  public void imprimir(List<Gasto> gastos) {
-    int total = 0;
-    int gastosDeComida = 0;
 
-    System.out.println("Expenses " + LocalDate.now());
+	List<Gasto> gastos;
+	LocalDate fecha;
+	int totalMontoGastos;
 
-    for (Gasto gasto : gastos) {
-      if (gasto.tipoGasto == TipoDeGasto.CENA || gasto.tipoGasto == TipoDeGasto.DESAYUNO) {
-        gastosDeComida += gasto.monto;
-      }
+	public ReporteDeGastos(List<Gasto> gastos, LocalDate fecha) {
+		this.gastos = Objects.requireNonNull(gastos);
+		this.fecha = Objects.requireNonNull(fecha);
+		this.totalMontoGastos = 0;
+	}
 
-      String nombreGasto = "";
-      switch (gasto.tipoGasto) {
-      case CENA:
-        nombreGasto = "Cena";
-        break;
-      case DESAYUNO:
-        nombreGasto = "Desayuno";
-        break;
-      case ALQUILER_AUTO:
-        nombreGasto = "Alquiler de Autos";
-        break;
-      }
+	public String imprimirReporte() {
+		int total = 0;
+		int gastosDeComida = 0;
+		String texto = "Expenses " + fecha;
+		for (Gasto gasto : gastos) {
+			String marcaExcesoComidas = "";
+			if (gasto instanceof Comida) {
+				gastosDeComida += gasto.getMonto();
+				marcaExcesoComidas = gasto.esExcesoDeGasto() ? "X" : " ";
+			}
+			String textoCentrado = (centrarTexto(gasto.getNombre()) + gasto.getMonto()
+					+ (gasto.getMonto() > 10000 ? "\t" : "\t\t") + marcaExcesoComidas);
+			texto += ("\n" + gasto.getNombre() + textoCentrado);
+			total += gasto.getMonto();
+		}
+		totalMontoGastos = total;
+		texto += ("\n" + "Gastos de comida: " + gastosDeComida + "\n" + "Total de gastos: " + total);
+		return texto;
+	}
 
-      String marcaExcesoComidas = gasto.tipoGasto == TipoDeGasto.CENA && gasto.monto > 5000
-          || gasto.tipoGasto == TipoDeGasto.DESAYUNO && gasto.monto > 1000 ? "X" : " ";
+	public int montoTotalGastos() {
+		return this.totalMontoGastos;
+	}
 
-      System.out.println(nombreGasto + "\t" + gasto.monto + "\t" + marcaExcesoComidas);
-
-      total += gasto.monto;
-    }
-
-    System.out.println("Gastos de comida: " + gastosDeComida);
-    System.out.println("Total de gastos: " + total);
-  }
+	String centrarTexto(String texto) {
+		int longTexto = texto.length();
+		String newTexto = "";
+		for (int i = 0; i < 35 - longTexto; i++) {
+			newTexto += " ";
+		}
+		return newTexto;
+	}
 }
