@@ -14,7 +14,6 @@ public class Recaudacion {
 		List<String[]> csvData = new ArrayList<String[]>();
 		CSVReader reader = new CSVReader(new FileReader("data.csv"));
 		String[] row = null;
-		List<String[]> results = new ArrayList<String[]>();
 
 		while ((row = reader.readNext()) != null) {
 			csvData.add(row);
@@ -24,39 +23,43 @@ public class Recaudacion {
 		csvData.remove(0);
 
 		if (options.containsKey("company_name")) {
-			for (int i = 0; i < csvData.size(); i++) {
-				if (csvData.get(i)[1].equals(options.get("company_name"))) {
-					results.add(csvData.get(i));
-				}
-			}
-			csvData = results;
+			csvData = filtro(x -> x[1].equals(options.get("company_name")), csvData); // Reemplace por Lambda
+//			for (int i = 0; i < csvData.size(); i++) {
+//				if (csvData.get(i)[1].equals(options.get("company_name"))) {
+//					results.add(csvData.get(i));
+//				}
+//			}
+//			csvData = results;
 		}
 
 		if (options.containsKey("city")) {
-			for (int i = 0; i < csvData.size(); i++) {
-				if (csvData.get(i)[4].equals(options.get("city"))) {
-					results.add(csvData.get(i));
-				}
-			}
-			csvData = results;
+			csvData = filtro(x -> x[4].equals(options.get("city")), csvData);
+//			for (int i = 0; i < csvData.size(); i++) {
+//				if (csvData.get(i)[4].equals(options.get("city"))) {
+//					results.add(csvData.get(i));
+//				}
+//			}
+//			csvData = results;
 		}
 
 		if (options.containsKey("state")) {
-			for (int i = 0; i < csvData.size(); i++) {
-				if (csvData.get(i)[5].equals(options.get("state"))) {
-					results.add(csvData.get(i));
-				}
-			}
-			csvData = results;
+			csvData = filtro(x -> x[5].equals(options.get("state")), csvData);
+//			for (int i = 0; i < csvData.size(); i++) {
+//				if (csvData.get(i)[5].equals(options.get("state"))) {
+//					results.add(csvData.get(i));
+//				}
+//			}
+//			csvData = results;
 		}
 
 		if (options.containsKey("round")) {
-			for (int i = 0; i < csvData.size(); i++) {
-				if (csvData.get(i)[9].equals(options.get("round"))) {
-					results.add(csvData.get(i));
-				}
-			}
-			csvData = results;
+			csvData = filtro(x -> x[9].equals(options.get("round")), csvData);
+//			for (int i = 0; i < csvData.size(); i++) {
+//				if (csvData.get(i)[9].equals(options.get("round"))) {
+//					results.add(csvData.get(i));
+//				}
+//			}
+//			csvData = results;
 		}
 
 		List<Map<String, String>> output = new ArrayList<Map<String, String>>();
@@ -79,11 +82,14 @@ public class Recaudacion {
 		return output;
 	}
 
-	public List<Map<String, String>> filtro(Condicion c) {
-		if (c.condicion(null)) {
-
+	private static List<String[]> filtro(Condicion c, List<String[]> csvData) { // Metodo para Lambda
+		List<String[]> results = new ArrayList<String[]>();
+		for (int i = 0; i < csvData.size(); i++) {
+			if (c.condicion(csvData.get(i))) {
+				results.add(csvData.get(i));
+			}
 		}
-		return null;
+		return results;
 	}
 
 }

@@ -8,19 +8,13 @@ import java.util.List;
 
 import org.junit.Test;
 
-import ar.unrn.eje3.Alquiler_Auto;
-import ar.unrn.eje3.Cena;
-import ar.unrn.eje3.Desayuno;
-import ar.unrn.eje3.Gasto;
-import ar.unrn.eje3.ReporteDeGastos;
-
 public class Test_eje3 {
 	@Test
 	public void hacerReporteDeGastos() {
 		Gasto gasto1 = new Alquiler_Auto("Alquiler de Auto", 6000);
 		Gasto gasto2 = new Cena("Cena navideña", 15000);
 		Gasto gasto3 = new Desayuno("Desayuno de huevos revueltos", 1500);
-		Gasto gasto4 = new Cena("Pancchos", 1000);
+		Gasto gasto4 = new Cena("Panchos", 1000);
 		List<Gasto> listaGastos = new ArrayList<Gasto>();
 		listaGastos.add(gasto1);
 		listaGastos.add(gasto2);
@@ -30,8 +24,12 @@ public class Test_eje3 {
 		ReporteDeGastos reporte = new ReporteDeGastos(listaGastos, dia);
 		System.out.println(reporte.imprimirReporte());
 
-		int result = 23500;
+		String result = "Expenses 2023-04-12\r\n" + "Alquiler de Auto                   6000		\r\n"
+				+ "Cena navideña                      15000	X\r\n"
+				+ "Desayuno de huevos revueltos       1500		X\r\n"
+				+ "Panchos                            1000		 \r\n" + "Gastos de comida: 17500\r\n"
+				+ "Total de gastos: 23500\r\n" + "";
 
-		assertEquals(result, reporte.montoTotalGastos());
+		assertEquals(result, reporte.imprimirReporte());
 	}
 }

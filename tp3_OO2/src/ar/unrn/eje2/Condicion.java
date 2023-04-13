@@ -2,5 +2,5 @@ package ar.unrn.eje2;
 
 interface Condicion {
 
-	boolean condicion(String text);
+	boolean condicion(String[] texto);
 }
