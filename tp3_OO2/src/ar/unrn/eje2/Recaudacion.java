@@ -23,43 +23,19 @@ public class Recaudacion {
 		csvData.remove(0);
 
 		if (options.containsKey("company_name")) {
-			csvData = filtro(x -> x[1].equals(options.get("company_name")), csvData); // Reemplace por Lambda
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[1].equals(options.get("company_name"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
+			csvData = filtro(x -> x[1].equals(options.get("company_name")), csvData); // Reemplace los for por Lambda
 		}
 
 		if (options.containsKey("city")) {
 			csvData = filtro(x -> x[4].equals(options.get("city")), csvData);
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[4].equals(options.get("city"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
 		}
 
 		if (options.containsKey("state")) {
 			csvData = filtro(x -> x[5].equals(options.get("state")), csvData);
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[5].equals(options.get("state"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
 		}
 
 		if (options.containsKey("round")) {
 			csvData = filtro(x -> x[9].equals(options.get("round")), csvData);
-//			for (int i = 0; i < csvData.size(); i++) {
-//				if (csvData.get(i)[9].equals(options.get("round"))) {
-//					results.add(csvData.get(i));
-//				}
-//			}
-//			csvData = results;
 		}
 
 		List<Map<String, String>> output = new ArrayList<Map<String, String>>();
