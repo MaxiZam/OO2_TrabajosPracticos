@@ -24,12 +24,12 @@ public class Test_eje3 {
 		ReporteDeGastos reporte = new ReporteDeGastos(listaGastos, dia);
 		System.out.println(reporte.imprimirReporte());
 
-		String result = "Expenses 2023-04-14\r\n" + "Alquiler de Auto                   6000		 \r\n"
+		String result = "Expenses " + dia + "\r\n" + "Alquiler de Auto                   6000		 \r\n"
 				+ "Cena navidenia                     15000	X\r\n"
 				+ "Desayuno de huevos revueltos       1500		X\r\n"
 				+ "Panchos                            1000		 \r\n" + "Gastos de comida: 17500\r\n"
 				+ "Total de gastos: 23500";
 
-		assertEquals(result, reporte.imprimirReporte()/* .replace("\n", "").replace("\r", "") */);
+		assertEquals(result, reporte.imprimirReporte());
 	}
 }
