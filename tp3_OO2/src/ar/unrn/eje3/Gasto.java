@@ -16,9 +16,13 @@ public abstract class Gasto {
 		return false;
 	}
 
+	public int devolverMontoSiSosComida() {
+		return 0;
+	}
+
 	public String getNombre() {
 		return this.nombre;
-	}
+	};
 
 	public int getMonto() {
 		return this.monto;

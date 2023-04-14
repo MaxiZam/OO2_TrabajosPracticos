@@ -21,18 +21,17 @@ public class ReporteDeGastos {
 		int gastosDeComida = 0;
 		String texto = "Expenses " + fecha;
 		for (Gasto gasto : gastos) {
-			String marcaExcesoComidas = "";
-			if (gasto instanceof Comida) {
-				gastosDeComida += gasto.getMonto();
-				marcaExcesoComidas = gasto.esExcesoDeGasto() ? "X" : " ";
-			}
+			String marcaExceso = "";
+			gastosDeComida += gasto.devolverMontoSiSosComida();
+			marcaExceso = gasto.esExcesoDeGasto() ? "X" : " ";
 			String textoCentrado = (centrarTexto(gasto.getNombre()) + gasto.getMonto()
-					+ (gasto.getMonto() > 10000 ? "\t" : "\t\t") + marcaExcesoComidas);
-			texto += ("\n" + gasto.getNombre() + textoCentrado);
+					+ (gasto.getMonto() > 10000 ? "\t" : "\t\t") + marcaExceso);
+			texto += (System.lineSeparator() + gasto.getNombre() + textoCentrado);
 			total += gasto.getMonto();
 		}
 		totalMontoGastos = total;
-		texto += ("\n" + "Gastos de comida: " + gastosDeComida + "\n" + "Total de gastos: " + total);
+		texto += (System.lineSeparator() + "Gastos de comida: " + gastosDeComida + System.lineSeparator()
+				+ "Total de gastos: " + total);
 		return texto;
 	}
 
