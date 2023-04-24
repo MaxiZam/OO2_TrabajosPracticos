@@ -1,28 +1,29 @@
-package modelo;
+package infraestructure.notification;
 
+import java.net.PasswordAuthentication;
 import java.util.Properties;
 
+import domain.portsout.Notificar;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
-import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
-public class Mail implements Notificar {
+public class MailTrap implements Notificar {
 
-	// private String destinatario;
+	private String destinatario;
 	private String asunto;
 	private String mensaje;
 
-	public Mail(String asunto, String mensaje) {
+	public MailTrap(/* String destinatario */String asunto, String mensaje) {
 		// this.destinatario = Objects.requireNonNull(destinatario);
 		this.asunto = asunto;
 		this.mensaje = mensaje;
 	}
 
-	public void enviarMensaje(String destinatario) {
+	public void enviarMensaje(String mensaje) {
 		// provide recipient's email ID
 		String to = destinatario;
 		// provide sender's email ID
@@ -41,7 +42,7 @@ public class Mail implements Notificar {
 		props.put("mail.smtp.port", "587");
 		// create the Session object
 		Session session = Session.getInstance(props, new jakarta.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
+			protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
 			}
 		});
