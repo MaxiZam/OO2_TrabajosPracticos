@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import domain.model.AdministrarParticipantes;
 import domain.portsin.UI;
 
 public class Vista extends JFrame implements UI {
@@ -21,8 +22,10 @@ public class Vista extends JFrame implements UI {
 	private JTextField nombre;
 	private JTextField telefono;
 	private JTextField region;
+	private AdministrarParticipantes admin;
 
-	public void setupUIComponents() {
+	public void setupUIComponents(AdministrarParticipantes admin) {
+		this.admin = admin;
 		setTitle("Add Participant");
 		setSize(400, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,7 +75,7 @@ public class Vista extends JFrame implements UI {
 					"El teléfono debe ingresarse de la siguiente forma: NNNN-NNNNNN", 0);
 			return;
 		}
-		if (!region.getText().equals("China") && !region.getText().equals("US") && !region.getText().equals("Europa")) {
+		if (admin.validarRegion(region.getText())) {
 			JOptionPane.showMessageDialog(nombre, this, "Region desconocida. Las conocidas son: China, US, Europa", 0);
 			return;
 		}

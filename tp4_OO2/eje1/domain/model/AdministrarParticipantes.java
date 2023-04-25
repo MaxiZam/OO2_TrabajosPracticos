@@ -21,7 +21,7 @@ public class AdministrarParticipantes {
 	}
 
 	public void setupUI() {
-		interfazUsuario.setupUIComponents();
+		interfazUsuario.setupUIComponents(this);
 	}
 
 	public void agregarParticipante() {
@@ -32,5 +32,13 @@ public class AdministrarParticipantes {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public boolean validarRegion(String region) {
+		region.toLowerCase();
+		if (region == "china" || region == "us" || region == "europa") {
+			return true;
+		}
+		return false;
 	}
 }

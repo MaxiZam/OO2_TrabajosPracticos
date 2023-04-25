@@ -3,7 +3,7 @@ package domain.model;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public class Participante {
+class Participante {
 
 	// private Connection dbConn;
 	private String nombre;
