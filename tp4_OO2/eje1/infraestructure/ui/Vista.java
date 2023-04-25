@@ -15,9 +15,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import domain.model.AdministrarParticipantes;
-import domain.portsin.UI;
+import domain.portsin.Vista;
 
-public class Vista extends JFrame implements UI {
+public class Vista extends JFrame implements Vista {
 
 	private JTextField nombre;
 	private JTextField telefono;

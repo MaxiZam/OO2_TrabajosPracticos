@@ -4,16 +4,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.portsin.UI;
+import domain.portsin.Vista;
 import domain.portsout.ObtenerParticipantes;
 
 public class AdministrarParticipantes {
 
-	private UI interfazUsuario;
+	private Vista interfazUsuario;
 	private ObtenerParticipantes almacenDeDatos;
 	private List<Participante> participantes;
 
-	public AdministrarParticipantes(UI ui, ObtenerParticipantes data) {
+	public AdministrarParticipantes(Vista ui, ObtenerParticipantes data) {
 		this.interfazUsuario = ui;
 		this.almacenDeDatos = data;
 		this.participantes = new ArrayList<>();
