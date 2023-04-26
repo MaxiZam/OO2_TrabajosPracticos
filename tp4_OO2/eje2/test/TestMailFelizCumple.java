@@ -14,7 +14,7 @@ public class TestMailFelizCumple {
 	@Test
 	public void testFelizCumpleEmpleado() {
 		RecuperarListaEmpleados archivo = new ArchivoTXT("Empleados");
-		Notificar notificar = new MailTrap("maxizambrana14@gmail.com");
+		Notificar notificar = new MailTrap();
 		EnviarMensajeCumple cumple = new EnviarMensajeCumple(archivo, notificar);
 		
 		int result = 3;
