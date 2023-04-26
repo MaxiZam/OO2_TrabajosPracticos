@@ -15,4 +15,20 @@ class Concurso {
 		this.fechaInicioInscripcion = fechaInicioInscripcion;
 		this.fechaFinInscripcion = fechaFinInscripcion;
 	}
+
+	public int getIdConcurso() {
+		return idConcurso;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public LocalDate getFechaInicioInscripcion() {
+		return fechaInicioInscripcion;
+	}
+
+	public LocalDate getFechaFinInscripcion() {
+		return fechaFinInscripcion;
+	}
 }

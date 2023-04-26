@@ -1,13 +1,10 @@
 package infraestructure.data;
 
-import java.io.File;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import domain.portsout.EmpleadoRecord;
 import domain.portsout.RecuperarListaEmpleados;
@@ -15,11 +12,9 @@ import domain.portsout.RecuperarListaEmpleados;
 public class ArchivoTXT implements RecuperarListaEmpleados {
 
 	private String nombreArch;
-	private File arch;
 
 	public ArchivoTXT(String nombreArch) {
 		this.nombreArch = nombreArch;
-		this.arch = new File(nombreArch);
 	}
 
 	@Override
@@ -37,10 +32,6 @@ public class ArchivoTXT implements RecuperarListaEmpleados {
 		} catch (IOException e) {
 			System.out.println("Error: archivo no encontrado");
 		}
-//		for(Emp lista: listaEmpleados)
-//		{
-//			System.out.println(lista);
-//		}
 		return listaEmpleados;
 	}
 

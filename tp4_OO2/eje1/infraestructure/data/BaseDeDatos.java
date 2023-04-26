@@ -1,19 +1,28 @@
 package infraestructure.data;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 
-import domain.portsout.RepositorioParticipantes;
+import domain.portsout.ParticipanteRecord;
+import domain.portsout.GuardarParticipantes;
+import domain.portsout.ObtenerParticipantes;
 
-public class BaseDeDatos implements RepositorioParticipantes {
+public class BaseDeDatos implements GuardarParticipantes, ObtenerParticipantes{
 
 	private Connection dbConn;
 
-	public BaseDeDatos(String url, String user, String password) throws SQLException {
-		this.dbConn = DriverManager.getConnection(url, user, password);
+	public BaseDeDatos(String url, String user, String password){
+		try {
+			this.dbConn = DriverManager.getConnection(url, user, password);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void setupBaseDeDatos() throws SQLException {
@@ -23,33 +32,27 @@ public class BaseDeDatos implements RepositorioParticipantes {
 		this.dbConn = DriverManager.getConnection(url, user, password);
 	}
 
-	public void guardarParticipante(String nombre, String telefono, String region) throws SQLException {
+	public void guardarParticipante(ParticipanteRecord participante) throws SQLException {
 		PreparedStatement st = dbConn
 				.prepareStatement("INSERT into participantes(nombre, telefono, region) values(?,?,?)");
-		try {
-			st.setString(1, nombre);
-			st.setString(2, telefono);
-			st.setString(3, region);
+			st.setString(1, participante.nombre());
+			st.setString(2, participante.telefono());
+			st.setString(3, participante.region());
 			st.executeUpdate();
-		} finally {
 			st.close();
-		}
 	}
 
 	@Override
-	public String[] recuperarParticipantes() {
-		String[] participantes = null;
+	public List<ParticipanteRecord> recuperarParticipantes() {
+		List<ParticipanteRecord> participantes = new ArrayList<>();
 		try (java.sql.Statement sent = dbConn.createStatement();
 				ResultSet resul = sent.executeQuery("SELECT nombre, telefono, region FROM participantes")) {
 			while (resul.next()) {
-				participantes[0] = resul.getString("nombre");
-				participantes[1] = resul.getString("telefono");
-				participantes[2] = resul.getString("region");
+				participantes.add(new ParticipanteRecord(resul.getString("nombre"),resul.getString("telefono"),resul.getString("region")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return participantes;
 	}
-
 }

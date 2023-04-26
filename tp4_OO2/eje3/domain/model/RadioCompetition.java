@@ -1,6 +1,9 @@
 package domain.model;
 
-public class RadioCompetition {
+import domain.portsin.AgregarPersonaAConcurso;
+import domain.portsin.PersonaRecord;
+
+public class RadioCompetition implements AgregarPersonaAConcurso{
 
 	public RadioCompetition() {
 
@@ -10,7 +13,7 @@ public class RadioCompetition {
 		// carga del archivo de texto concursos.txt los concursos
 	}
 
-	private void saveInscription() {
+	public void saveInscription(PersonaRecord persona) {
 		// if (/*validations()*/) {
 		// Guarda en inscriptos.txt los datos de la persona y el concurso elegido
 		// }

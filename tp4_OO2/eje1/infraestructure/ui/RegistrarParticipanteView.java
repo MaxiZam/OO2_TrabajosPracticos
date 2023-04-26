@@ -12,13 +12,10 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import domain.model.AdministrarParticipantes;
-import domain.portsin.View;
 
-public class RegistrarParticipanteView extends JFrame implements View {
-
-	private JTextField nombre;
-	private JTextField telefono;
-	private JTextField region;
+public class RegistrarParticipanteView extends JFrame{
+	
+	private static final long serialVersionUID = 1L;
 	private AdministrarParticipantes admin;
 
 	public RegistrarParticipanteView(AdministrarParticipantes admin) {
@@ -73,13 +70,4 @@ public class RegistrarParticipanteView extends JFrame implements View {
 		pack();
 		setVisible(true);
 	}
-
-//	@Override
-//	public String[] obtenerDatosParticipante() {
-//		String[] datosParticipante = null;
-//		datosParticipante[0] = nombre.getText();
-//		datosParticipante[1] = telefono.getText();
-//		datosParticipante[2] = region.getText();
-//		return datosParticipante;
-//	}
 }

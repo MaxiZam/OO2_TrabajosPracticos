@@ -2,36 +2,37 @@ package domain.model;
 
 import java.sql.SQLException;
 
-import domain.portsout.RepositorioParticipantes;
+import domain.portsin.SumarParticipante;
+import domain.portsout.GuardarParticipantes;
+import domain.portsout.ParticipanteRecord;
 
-public class AdministrarParticipantes {
+public class AdministrarParticipantes  implements SumarParticipante{
 
-	private RepositorioParticipantes almacenDeDatos;
+	private GuardarParticipantes almacenDeDatos;
 
-	public AdministrarParticipantes(RepositorioParticipantes data) {
+	public AdministrarParticipantes(GuardarParticipantes data) {
 		this.almacenDeDatos = data;
 	}
 
-	public void agregarParticipante(String nombre, String telefono, String region) throws SQLException {
+	public void agregarParticipante(String nombre, String telefono, String region){
 		if (nombre.isBlank()) {
 			throw new IllegalArgumentException("El nombre no puede estar vacío");
 		}
-
 		if (telefono.isBlank()) {
 			throw new IllegalArgumentException("El teléfono no puede estar vacío");
 		}
-
 		if (!validarTelefono(telefono)) {
 			throw new IllegalArgumentException("El teléfono debe ingresarse de la siguiente forma: NNNN-NNNNNN");
 		}
-
 		region.toLowerCase();
 		if (!region.equals("china") && !region.equals("us") && !region.equals("europa")) {
 			throw new IllegalArgumentException("Región desconocida. Las conocidas son: China, US, Europa");
 		}
-
-		// Participante participante = new Participante(nombre, telefono, region);
-		almacenDeDatos.guardarParticipante(nombre, telefono, region);
+		try {
+			almacenDeDatos.guardarParticipante(new ParticipanteRecord(nombre, telefono, region));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private boolean validarTelefono(String telefono) {
