@@ -1,18 +1,21 @@
 package main;
 
-import java.sql.SQLException;
+import java.awt.EventQueue;
 
 import domain.model.AdministrarParticipantes;
-import domain.portsin.Vista;
-import domain.portsout.ObtenerParticipantes;
 import infraestructure.data.BaseDeDatos;
-import infraestructure.ui.Vista;
+import infraestructure.ui.RegistrarParticipanteView;
 
 public class Main {
 
-	public static void main(String[] args) throws SQLException {
-		Vista interfaz = new Vista();
-		ObtenerParticipantes bd = new BaseDeDatos("jdbc:derby://localhost:1527/participantes", "app", "app");
-		AdministrarParticipantes admin = new AdministrarParticipantes(interfaz, bd);
+	public static void main(String[] args) {
+		EventQueue.invokeLater(() -> {
+			try {
+				new RegistrarParticipanteView(new AdministrarParticipantes(
+						new BaseDeDatos("jdbc:derby://localhost:1527/participantes", "app", "app")));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
 	}
 }

@@ -6,30 +6,24 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import domain.portsout.ObtenerParticipantes;
+import domain.portsout.RepositorioParticipantes;
 
-public class BaseDeDatos implements ObtenerParticipantes {
+public class BaseDeDatos implements RepositorioParticipantes {
 
-	private String url;
-	private String user;
-	private String password;
 	private Connection dbConn;
 
 	public BaseDeDatos(String url, String user, String password) throws SQLException {
-		this.url = url;
-		this.user = user;
-		this.password = password;
 		this.dbConn = DriverManager.getConnection(url, user, password);
 	}
 
 	public void setupBaseDeDatos() throws SQLException {
-		this.url = "jdbc:derby://localhost:1527/participantes";
-		this.user = "app";
-		this.password = "app";
+		String url = "jdbc:derby://localhost:1527/participantes";
+		String user = "app";
+		String password = "app";
 		this.dbConn = DriverManager.getConnection(url, user, password);
 	}
 
-	public void insertarParticipante(String nombre, String telefono, String region) throws SQLException {
+	public void guardarParticipante(String nombre, String telefono, String region) throws SQLException {
 		PreparedStatement st = dbConn
 				.prepareStatement("INSERT into participantes(nombre, telefono, region) values(?,?,?)");
 		try {

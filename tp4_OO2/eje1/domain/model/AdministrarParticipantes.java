@@ -1,44 +1,41 @@
 package domain.model;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import domain.portsin.Vista;
-import domain.portsout.ObtenerParticipantes;
+import domain.portsout.RepositorioParticipantes;
 
 public class AdministrarParticipantes {
 
-	private Vista interfazUsuario;
-	private ObtenerParticipantes almacenDeDatos;
-	private List<Participante> participantes;
+	private RepositorioParticipantes almacenDeDatos;
 
-	public AdministrarParticipantes(Vista ui, ObtenerParticipantes data) {
-		this.interfazUsuario = ui;
+	public AdministrarParticipantes(RepositorioParticipantes data) {
 		this.almacenDeDatos = data;
-		this.participantes = new ArrayList<>();
-		setupUI();
 	}
 
-	public void setupUI() {
-		interfazUsuario.setupUIComponents(this);
-	}
-
-	public void agregarParticipante() {
-		String[] datos = interfazUsuario.obtenerDatosParticipante();
-		try {
-			Participante nuevoParticipante = new Participante(datos[0], datos[1], datos[2]);
-			participantes.add(nuevoParticipante);
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void agregarParticipante(String nombre, String telefono, String region) throws SQLException {
+		if (nombre.isBlank()) {
+			throw new IllegalArgumentException("El nombre no puede estar vacío");
 		}
-	}
 
-	public boolean validarRegion(String region) {
+		if (telefono.isBlank()) {
+			throw new IllegalArgumentException("El teléfono no puede estar vacío");
+		}
+
+		if (!validarTelefono(telefono)) {
+			throw new IllegalArgumentException("El teléfono debe ingresarse de la siguiente forma: NNNN-NNNNNN");
+		}
+
 		region.toLowerCase();
-		if (region == "china" || region == "us" || region == "europa") {
-			return true;
+		if (!region.equals("china") && !region.equals("us") && !region.equals("europa")) {
+			throw new IllegalArgumentException("Región desconocida. Las conocidas son: China, US, Europa");
 		}
-		return false;
+
+		// Participante participante = new Participante(nombre, telefono, region);
+		almacenDeDatos.guardarParticipante(nombre, telefono, region);
+	}
+
+	private boolean validarTelefono(String telefono) {
+		String regex = "\\d{4}-\\d{6}";
+		return telefono.matches(regex);
 	}
 }
