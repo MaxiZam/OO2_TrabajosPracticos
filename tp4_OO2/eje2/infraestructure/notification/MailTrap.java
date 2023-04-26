@@ -1,31 +1,30 @@
 package infraestructure.notification;
 
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 
 import domain.portsout.Notificar;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
+import jakarta.mail.PasswordAuthentication;
 import jakarta.mail.Session;
 import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
-public class MailTrap implements Notificar {
+public class MailTrap implements Notificar{
 
 	private String destinatario;
 	private String asunto;
 	private String mensaje;
 
-	public MailTrap(/* String destinatario */String asunto, String mensaje) {
-		// this.destinatario = Objects.requireNonNull(destinatario);
+	public MailTrap(String asunto, String mensaje) {
 		this.asunto = asunto;
 		this.mensaje = mensaje;
 	}
 
-	public void enviarMensaje(String mensaje) {
+	public void enviarMensaje(String destinatario) {
 		// provide recipient's email ID
-		String to = destinatario;
+		this.destinatario = destinatario;
 		// provide sender's email ID
 		String from = "jakartafrom@example.com";
 		// provide Mailtrap's username
@@ -42,7 +41,7 @@ public class MailTrap implements Notificar {
 		props.put("mail.smtp.port", "587");
 		// create the Session object
 		Session session = Session.getInstance(props, new jakarta.mail.Authenticator() {
-			protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
 			}
 		});
@@ -52,7 +51,7 @@ public class MailTrap implements Notificar {
 			// set From email field
 			message.setFrom(new InternetAddress(from));
 			// set To email field
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.setRecipient(Message.RecipientType.TO, new InternetAddress(destinatario));
 			// set email subject field
 			message.setSubject(asunto);
 			// set the content of the email message
