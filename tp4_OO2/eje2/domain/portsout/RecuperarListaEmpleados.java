@@ -1,6 +1,8 @@
 package domain.portsout;
 
+import java.util.List;
+
 public interface RecuperarListaEmpleados {
 
-	String[] devolverListaEmpleados();
+	public List<EmpleadoRecord> devolverListaEmpleados();
 }

@@ -9,10 +9,10 @@ class Empleado {
 	private LocalDate fechaNacimiento;
 	private String mail;
 
-	public Empleado(String apellido, String nombre, LocalDate fecha, String mail) {
+	public Empleado(String apellido, String nombre, String fecha, String mail) {
 		this.apellido = apellido;
 		this.nombre = nombre;
-		this.fechaNacimiento = fecha;
+		this.fechaNacimiento = LocalDate.parse(fecha);
 		this.mail = mail;
 	}
 
@@ -27,6 +27,10 @@ class Empleado {
 
 	public String nombre() {
 		return this.nombre;
+	}
+	
+	public String mail() {
+		return this.mail;
 	}
 
 }

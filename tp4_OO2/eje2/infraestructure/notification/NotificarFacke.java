@@ -5,8 +5,8 @@ import domain.portsout.Notificar;
 public class NotificarFacke implements Notificar {
 
 	@Override
-	public void enviarMensaje(String mensaje) {
-		System.out.println(mensaje);
+	public void enviarMensaje(String destinatario, String mensaje) {
+		System.out.println(destinatario+" -> "+mensaje);
 	}
 
 }

@@ -11,20 +11,19 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
-public class MailTrap implements Notificar{
+public class MailTrap implements Notificar {
 
-	private String destinatario;
+	private String destinatarioTrap;
 	private String asunto;
 	private String mensaje;
 
-	public MailTrap(String asunto, String mensaje) {
-		this.asunto = asunto;
-		this.mensaje = mensaje;
+	public MailTrap(String destinatarioTrap) {
+		this.destinatarioTrap = destinatarioTrap;
 	}
 
-	public void enviarMensaje(String destinatario) {
+	public void enviarMensaje(String destinatario, String mensaje) {
 		// provide recipient's email ID
-		this.destinatario = destinatario;
+		//this.destinatario = destinatario;
 		// provide sender's email ID
 		String from = "jakartafrom@example.com";
 		// provide Mailtrap's username
