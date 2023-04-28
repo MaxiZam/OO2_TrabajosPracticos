@@ -1,7 +1,6 @@
 package infraestructure.ui;
 
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 
 import javax.swing.GroupLayout;
@@ -17,7 +16,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import domain.portsin.AgregarPersonaAConcurso;
-import domain.portsin.PersonaRecord;
+import domain.portsout.InscriptoRecord;
 
 public class VistaRadioCompetition {
 
@@ -37,7 +36,7 @@ public class VistaRadioCompetition {
 	private JLabel lblCompetition;
 
 	private AgregarPersonaAConcurso agregar;
-	
+
 	public VistaRadioCompetition(AgregarPersonaAConcurso agregar) {
 		this.agregar = agregar;
 		var frame = new JFrame("Inscription to Competition");
@@ -71,7 +70,8 @@ public class VistaRadioCompetition {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnOk.setEnabled(false);
-				agregar.saveInscription(new PersonaRecord(txtLastName.getText(),txtName.getText(),txtPhone.getText(),txtEmail.getText()));
+				agregar.saveInscription(new InscriptoRecord(txtLastName.getText(), txtName.getText(),
+						txtPhone.getText(), txtEmail.getText()));
 				btnOk.setEnabled(true);
 			}
 		});
