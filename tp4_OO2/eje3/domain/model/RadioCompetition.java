@@ -1,10 +1,14 @@
 package domain.model;
 
+import java.util.List;
+
 import domain.portsin.AgregarPersonaAConcurso;
+import domain.portsin.ConcursoRecord;
+import domain.portsin.VerConcursos;
 import domain.portsout.GuardarInscriptos;
 import domain.portsout.InscriptoRecord;
 
-public class RadioCompetition implements AgregarPersonaAConcurso {
+public class RadioCompetition implements AgregarPersonaAConcurso, VerConcursos {
 
 	private GuardarInscriptos data;
 
@@ -12,7 +16,8 @@ public class RadioCompetition implements AgregarPersonaAConcurso {
 		this.data = data;
 	}
 
-	private void todosLosConcursos() {
+	public List<ConcursoRecord> todosLosConcursos() {
+		return null;
 		// carga del archivo de texto concursos.txt los concursos
 	}
 

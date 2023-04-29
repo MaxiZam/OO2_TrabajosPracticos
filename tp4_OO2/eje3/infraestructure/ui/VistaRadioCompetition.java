@@ -2,6 +2,7 @@ package infraestructure.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -16,6 +17,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
 import domain.portsin.AgregarPersonaAConcurso;
+import domain.portsin.ConcursoRecord;
+import domain.portsin.VerConcursos;
 import domain.portsout.InscriptoRecord;
 
 public class VistaRadioCompetition {
@@ -36,8 +39,10 @@ public class VistaRadioCompetition {
 	private JLabel lblCompetition;
 
 	private AgregarPersonaAConcurso agregar;
+	private VerConcursos ver;
 
-	public VistaRadioCompetition(AgregarPersonaAConcurso agregar) {
+	public VistaRadioCompetition(AgregarPersonaAConcurso agregar, VerConcursos ver) {
+		this.ver = ver;
 		this.agregar = agregar;
 		var frame = new JFrame("Inscription to Competition");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,7 +82,10 @@ public class VistaRadioCompetition {
 		});
 		lblCompetition = new JLabel("Concurso:");
 		comboBox = new JComboBox<String>();
-		// todosLosConcursos();
+		List<ConcursoRecord> concursos = ver.todosLosConcursos();
+		for (ConcursoRecord concurso : concursos) {
+			comboBox.addItem(concurso.nombre());
+		}
 	}
 
 	private boolean validations() {
