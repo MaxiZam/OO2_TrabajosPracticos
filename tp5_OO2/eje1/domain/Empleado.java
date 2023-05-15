@@ -28,8 +28,4 @@ public abstract class Empleado {
 	public void eliminarEmpleado(Empleado empleado) {
 		empleados.remove(empleado);
 	}
-
-	public List<Empleado> verEmpleados() {
-		return empleados;
-	}
 }
