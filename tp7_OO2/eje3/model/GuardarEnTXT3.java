@@ -1,21 +1,38 @@
 package model;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class GuardarEnTXT extends Observador {
+public class GuardarEnTXT3 implements ActualizarDecorator {
 
 	private String ruta;
+	private ActualizarDecorator actualizar;
 
-	public GuardarEnTXT(String ruta) {
-		super(null);
+	public GuardarEnTXT3(String ruta, ActualizarDecorator actualizar) {
+		this.ruta = ruta;
+		this.actualizar = actualizar;
+	}
+
+	public GuardarEnTXT3(String ruta) {
+		this.ruta = ruta;
 	}
 
 	public void actualizar(int temp, LocalDate dia) throws IOException {
-		FileWriter fw = new FileWriter(this.ruta);
-		fw.write(temp + "|" + dia + "\n");
-		fw.close();
+		try {
+			File file = new File(this.ruta);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			FileWriter fw = new FileWriter(file, true);
+			fw.write(temp + " | " + dia + "\n");
+			fw.close();
+			if (actualizar != null)
+				actualizar.actualizar(temp, dia);
+		} catch (IOException e) {
+			throw new RuntimeException("Hubo un error, no se puede actualizar...");
+		}
 	}
 
 }

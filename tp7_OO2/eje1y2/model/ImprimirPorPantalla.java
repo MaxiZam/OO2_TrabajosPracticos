@@ -3,10 +3,9 @@ package model;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class ImprimirPorPantalla extends Observador {
+public class ImprimirPorPantalla implements ActualizarDecorator {
 
 	public ImprimirPorPantalla() {
-		super(null);
 	}
 
 	public void actualizar(int temp, LocalDate dia) throws IOException {

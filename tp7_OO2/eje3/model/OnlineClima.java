@@ -1,6 +1,6 @@
 package model;
 
-public interface ClimaOnline {
+public interface OnlineClima {
 
 	public int temperatura();
 }

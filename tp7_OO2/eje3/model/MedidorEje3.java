@@ -3,21 +3,22 @@ package model;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class Medidor {
+public class MedidorEje3 {
 
 	private int temperatura;
 	private ClimaOnline clima;
-	private Observador ob;
+	private ActualizarDecorator actualizar;
 
-	public Medidor(ClimaOnline clima, Observador ob) {
+	public MedidorEje3(ClimaOnline clima, ActualizarDecorator actualizar) {
 		this.clima = clima;
+		this.actualizar = actualizar;
 	}
 
 	public void leerTemperatura() {
 		// leo la temperatura del servicio web
 		this.temperatura = this.clima.temperatura();
 		try {
-			this.ob.actualizar(temperatura, LocalDate.now());
+			this.actualizar.actualizar(temperatura, LocalDate.now());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -12,14 +12,11 @@ public class Pedido {
 	private List<Plato> listaComidas = new ArrayList<>();
 	private List<Bebida> listaBebidas = new ArrayList<>();
 
-	private GuardarTexto guardar;
-
-	public Pedido(List<Plato> listaComidas, List<Bebida> listaBebidas, GuardarTexto guardar) {
+	public Pedido(List<Plato> listaComidas, List<Bebida> listaBebidas) {
 		this.listaComidas = listaComidas;
 		this.listaBebidas = listaBebidas;
-		this.guardar = Objects.requireNonNull(guardar);
 	}
-	
+
 	public float pedirCuenta(Tarjeta tarjeta, int porcentajePropina) {
 		float totalComida = 0;
 		float totalBebida = 0;
@@ -31,7 +28,6 @@ public class Pedido {
 		}
 		float cuenta = tarjeta.calcularCosto(totalComida, totalBebida, porcentajePropina);
 		String texto = new String(LocalDate.now() + " || " + cuenta);
-		guardar.guardarTexto(texto);
 		return cuenta;
 	}
 }

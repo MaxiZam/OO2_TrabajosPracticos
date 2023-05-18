@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Observador {
 
-	private List<Observador> listaObservers;
+	private List<ActualizarDecorator> listaObservers;
 
-	public Observador(List<Observador> observers) {
-		this.listaObservers = observers;
+	public Observador(List<ActualizarDecorator> list) {
+		this.listaObservers = list;
 	}
 
 	public void actualizar(int temp, LocalDate dia) throws IOException {
-		for (Observador ob : listaObservers) {
+		for (ActualizarDecorator ob : listaObservers) {
 			ob.actualizar(temp, dia);
 		}
 	}

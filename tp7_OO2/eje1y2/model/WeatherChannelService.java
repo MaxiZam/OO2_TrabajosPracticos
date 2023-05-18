@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
-public class WeatherChannelService implements ClimaOnline {
+public class WeatherChannelService implements OnlineClima {
 
 	private String apiKey;
 
@@ -26,7 +26,8 @@ public class WeatherChannelService implements ClimaOnline {
 
 	public int temperatura() {
 		// mi key =
-		String url = "https://api.openweathermap.org/data/2.5/weather?q=viedma,032&lang=sp&APPID=" + apiKey;
+		String url = "https://api.openweathermap.org/data/2.5/weather?q=viedma,032&lang=sp&APPID=" + apiKey
+				+ "&units=metric";
 		HttpClient httpClient = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).build();
 		HttpResponse<String> response = null;
@@ -40,7 +41,7 @@ public class WeatherChannelService implements ClimaOnline {
 		String jsonString = response.body();
 		Gson gson = new GsonBuilder().create();
 		var jsonObject = gson.fromJson(jsonString, JsonObject.class);
-		int temp = jsonObject.getAsJsonArray("weather").asList().get(0).getAsJsonObject().get("main.temp").getAsInt();
+		int temp = jsonObject.getAsJsonObject("main").getAsJsonObject().get("temp").getAsInt();
 		return temp;
 	}
 

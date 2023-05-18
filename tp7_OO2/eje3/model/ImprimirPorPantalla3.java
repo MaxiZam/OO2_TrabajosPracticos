@@ -3,10 +3,15 @@ package model;
 import java.io.IOException;
 import java.time.LocalDate;
 
-public class ImprimirPorPantalla extends Observador {
+public class ImprimirPorPantalla3 implements ActualizarDecorator {
 
-	public ImprimirPorPantalla() {
-		super(null);
+	private ActualizarDecorator actualizar;
+
+	public ImprimirPorPantalla3(ActualizarDecorator actualizar) {
+		this.actualizar = actualizar;
+	}
+
+	public ImprimirPorPantalla3() {
 	}
 
 	public void actualizar(int temp, LocalDate dia) throws IOException {
@@ -17,6 +22,8 @@ public class ImprimirPorPantalla extends Observador {
 		if (temp > 17) {
 			System.out.println("Hace calor, se encenderá el aire acondicionado\n");
 		}
+		if (actualizar != null)
+			actualizar.actualizar(temp, dia);
 	}
 
 }

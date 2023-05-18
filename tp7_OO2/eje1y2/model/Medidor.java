@@ -6,11 +6,12 @@ import java.time.LocalDate;
 public class Medidor {
 
 	private int temperatura;
-	private ClimaOnline clima;
+	private OnlineClima clima;
 	private Observador ob;
 
-	public Medidor(ClimaOnline clima, Observador ob) {
+	public Medidor(OnlineClima clima, Observador ob) {
 		this.clima = clima;
+		this.ob = ob;
 	}
 
 	public void leerTemperatura() {
