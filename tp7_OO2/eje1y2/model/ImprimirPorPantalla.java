@@ -9,7 +9,7 @@ public class ImprimirPorPantalla implements ActualizarDecorator {
 	}
 
 	public void actualizar(int temp, LocalDate dia) throws IOException {
-		System.out.println("Temperatura: " + temp + " | " + "Fecha: " + dia + "\n");
+		System.out.println("Temperatura: " + temp + " | " + "Fecha: " + dia);
 		if (temp < 12) {
 			System.out.println("Hace frio, se encenderá la caldera\n");
 		}

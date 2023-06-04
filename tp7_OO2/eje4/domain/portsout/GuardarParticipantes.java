@@ -1,7 +1,6 @@
 package domain.portsout;
 
 import java.sql.SQLException;
-import java.util.List;
 
 public interface GuardarParticipantes {
 

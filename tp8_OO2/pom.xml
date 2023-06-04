@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>tp6_OO2</groupId>
-  <artifactId>tp6_OO2</artifactId>
+  <groupId>tp8_OO2</groupId>
+  <artifactId>tp8_OO2</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
-    <sourceDirectory>eje1</sourceDirectory>
+    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -15,16 +15,4 @@
       </plugin>
     </plugins>
   </build>
-  <dependencies>
-  	<dependency>
-  		<groupId>com.google.code.gson</groupId>
-  		<artifactId>gson</artifactId>
-  		<version>2.10.1</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.sun.mail</groupId>
-  		<artifactId>jakarta.mail</artifactId>
-  		<version>2.0.1</version>
-  	</dependency>
-  </dependencies>
 </project>

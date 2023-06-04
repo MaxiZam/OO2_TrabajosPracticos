@@ -41,7 +41,7 @@ public class BaseDeDatos implements GuardarParticipantes, ObtenerParticipantes {
 		PreparedStatement st = dbConn
 				.prepareStatement("INSERT into participantes(nombre, telefono, region) values(?,?,?)");
 		st.setString(1, participante.nombre());
-		st.setString(2, participante.telefono());
+		st.setString(2, participante.mail());
 		st.setString(3, participante.region());
 		st.executeUpdate();
 		st.close();

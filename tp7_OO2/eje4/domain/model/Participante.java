@@ -7,12 +7,12 @@ class Participante {
 
 	// private Connection dbConn;
 	private String nombre;
-	private String telefono;
+	private String mail;
 	private String region;
 
-	public Participante(String nombre, String telefono, String region) throws SQLException {
+	public Participante(String nombre, String mail, String region) throws SQLException {
 		this.nombre = Objects.requireNonNull(nombre);
-		this.telefono = Objects.requireNonNull(telefono);
+		this.mail = Objects.requireNonNull(mail);
 		this.region = Objects.requireNonNull(region);
 	}
 

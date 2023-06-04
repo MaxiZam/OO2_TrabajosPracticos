@@ -43,6 +43,8 @@ public class GuardarEnBD implements Guardar {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		if (guardar != null)
+			guardar.guardarItems(item);
 	}
 
 }

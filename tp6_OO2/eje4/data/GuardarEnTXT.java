@@ -30,6 +30,8 @@ public class GuardarEnTXT implements Guardar {
 		} catch (IOException e) {
 			System.out.println("Error: archivo no encontrado");
 		}
+		if (guardar != null)
+			guardar.guardarItems(item);
 	}
 
 }

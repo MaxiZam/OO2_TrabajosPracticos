@@ -1,4 +1,4 @@
-package modeloTarjetas;
+package modelo.tarjetas;
 
 public abstract class Tarjeta {
 

@@ -1,4 +1,4 @@
-package modeloTarjetas;
+package modelo.tarjetas;
 
 public class Visa extends Tarjeta {
 

@@ -4,6 +4,7 @@ import java.awt.ComponentOrientation;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -13,8 +14,8 @@ import javax.swing.border.EmptyBorder;
 
 import domain.model.AdministrarParticipantes;
 
-public class RegistrarParticipanteView extends JFrame{
-	
+public class RegistrarParticipanteView extends JFrame {
+
 	private static final long serialVersionUID = 1L;
 	private AdministrarParticipantes admin;
 
@@ -25,18 +26,16 @@ public class RegistrarParticipanteView extends JFrame{
 
 	public void setupUIComponents() {
 		setTitle("Add Participant");
-		setSize(400, 400);
+		setSize(467, 82);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JTextField nombreField = new JTextField(10);
-		JTextField telefonoField = new JTextField(10);
-		JTextField regionField = new JTextField(10);
+		JTextField mailField = new JTextField(10);
 		nombreField.setText("");
-		telefonoField.setText("");
-		regionField.setText("China");
+		mailField.setText("");
 
 		JLabel nombreLabel = new JLabel("Nombre: ");
-		JLabel telefonoLabel = new JLabel("Telefono: ");
+		JLabel mailLabel = new JLabel("Mail: ");
 		JLabel regionLabel = new JLabel("Region: ");
 
 		JPanel contentPane = new JPanel();
@@ -44,19 +43,24 @@ public class RegistrarParticipanteView extends JFrame{
 		contentPane.setLayout(new FlowLayout());
 		contentPane.add(nombreLabel);
 		contentPane.add(nombreField);
-		contentPane.add(telefonoLabel);
-		contentPane.add(telefonoField);
+		contentPane.add(mailLabel);
+		contentPane.add(mailField);
 		contentPane.add(regionLabel);
-		contentPane.add(regionField);
+
+		JComboBox regionBox = new JComboBox();
+		regionBox.addItem("China");
+		regionBox.addItem("USA");
+		regionBox.addItem("Europa");
+		contentPane.add(regionBox);
 
 		JButton botonCargar = new JButton("Cargar");
 		botonCargar.addActionListener(e -> {
 			try {
 				String nombre = nombreField.getText();
-				String telefono = telefonoField.getText();
-				String region = regionField.getText();
+				String mail = mailField.getText();
+				String region = regionBox.getSelectedItem().toString();
 
-				admin.agregarParticipante(nombre, telefono, region);
+				admin.agregarParticipante(nombre, mail, region);
 
 				dispose();
 			} catch (Exception ex) {
