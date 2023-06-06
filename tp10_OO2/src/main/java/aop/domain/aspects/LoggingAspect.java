@@ -1,4 +1,4 @@
-package main.java.aop.domain;
+package main.java.aop.domain.aspects;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import java.util.Map;
 
@@ -15,6 +15,6 @@ public class CarritoCompra {
 	}
 
 	public double verPrecioEnvio(EmpresaEnvio opcionEnvio) {
-		return opcionEnvio.calcularMontoEnvio(compras, direccion, destino);
+		return opcionEnvio.calcularMontoTotal(compras, direccion, destino);
 	}
 }

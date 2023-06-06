@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import java.util.Map;
 
@@ -6,13 +6,16 @@ import infraestructure.ServicioDistancia;
 
 public class CorreoArgentino extends EmpresaEnvio {
 
-	CorreoArgentino(ServicioDistancia servicio) {
+	public CorreoArgentino(ServicioDistancia servicio) {
 		super(servicio);
 	}
 
-	public double calcularMontoEnvio(Map<Double, Double> compras, String direccion, String destino) {
-		double monto = montoFijo(direccion, destino);
-		monto += adicionalDistancia(direccion, destino);
+	public double calcularMontoTotal(Map<Double, Double> compras, String direccion, String destino) {
+		double monto = 0;
+		for (double clave : compras.keySet()) {
+			monto += clave;
+		}
+		monto += adicionalDistancia(direccion, destino) + montoFijo(direccion, destino);
 		return monto;
 	}
 

@@ -1,13 +1,15 @@
-package main.java.aop.domain.portsout;
+package main.java.aop.domain.aspects;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component
 public class TimeExecutionAspect {
 
-	@Around("execution(main.java.aop.domain)")
+	@Around("execution(public void loginUser(..))")
 	public void tiempo(ProceedingJoinPoint joinPoint) throws Throwable {
 		long startTime = System.nanoTime();
 

@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import java.util.Map;
 
@@ -6,13 +6,16 @@ import infraestructure.ServicioDistancia;
 
 public class ColectivosSur extends EmpresaEnvio {
 
-	ColectivosSur(ServicioDistancia servicio) {
+	public ColectivosSur(ServicioDistancia servicio) {
 		super(servicio);
 	}
 
-	public double calcularMontoEnvio(Map<Double, Double> compras, String direccion, String destino) {
-		double monto = montoFijo(direccion, destino);
-		monto += adicionalPeso(compras);
+	public double calcularMontoTotal(Map<Double, Double> compras, String direccion, String destino) {
+		double monto = 0;
+		for (double clave : compras.keySet()) {
+			monto += clave;
+		}
+		monto += adicionalPeso(compras) + montoFijo(direccion, destino);
 		return monto;
 	}
 

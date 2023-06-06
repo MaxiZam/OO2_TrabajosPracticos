@@ -1,4 +1,4 @@
-package model;
+package domain;
 
 import java.util.Map;
 
@@ -12,7 +12,7 @@ public abstract class EmpresaEnvio {
 		this.servicio = servicio;
 	}
 
-	public abstract double calcularMontoEnvio(Map<Double, Double> compras, String direccion, String destino);
+	public abstract double calcularMontoTotal(Map<Double, Double> compras, String direccion, String destino);
 
 	protected abstract double montoFijo(String direccion, String destino);
 }
