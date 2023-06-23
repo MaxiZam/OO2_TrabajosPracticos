@@ -6,12 +6,10 @@ class Menu {
 
 	private List<Accion> acciones;
 	private ConfiguracionFramework config;
-	// private ExecutorService ejecutor;
 
 	public Menu(String arch) {
 		if (ArchivoJson.isJsonFile(arch)) {
 			config = new ArchivoJson();
-			// ejecutor = Executors.newFixedThreadPool(ArchivoJson.maxThreads());
 		} else {
 			config = new ArchivoTXT();
 		}

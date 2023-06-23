@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+import java.util.concurrent.Executors;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -62,10 +62,6 @@ public class ArchivoJson implements ConfiguracionFramework {
 		return accionesC;
 	}
 
-	protected int maxThreads() {
-		return maxHilos;
-	}
-
 	protected static boolean isJsonFile(String filePath) {
 		if (filePath.toLowerCase().endsWith(".json")) {
 			return true;
@@ -100,12 +96,25 @@ public class ArchivoJson implements ConfiguracionFramework {
 						i++;
 					}
 				}
-				try {
-					List<Future<Object>> futures = ejecutor.invokeAll(runing);
-					ejecutor.shutdown();
-					ejecutor.awaitTermination(Long.MAX_VALUE, java.util.concurrent.TimeUnit.NANOSECONDS);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+				if (maxHilos > 0 && maxHilos < 10) {
+					try {
+						ejecutor = Executors.newFixedThreadPool(maxHilos);
+						ejecutor.invokeAll(runing);
+						ejecutor.shutdown();
+						ejecutor.awaitTermination(Long.MAX_VALUE, java.util.concurrent.TimeUnit.NANOSECONDS);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				} else {
+					System.out.println("error en el numero de hilos.");
+					for (RunnableAdapter r : runing) {
+						try {
+							r.call();
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 				}
 			}
 		}));
