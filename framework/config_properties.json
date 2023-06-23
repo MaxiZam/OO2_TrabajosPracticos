@@ -1,0 +1,5 @@
+{
+    "acciones": ["zambrana.utilizacion.AccionUno", "zambrana.utilizacion.AccionDos"],
+    "max-threads": 4
+}
+   
